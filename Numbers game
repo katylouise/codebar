@@ -1,0 +1,3 @@
+x = Random.rand()
+
+y = Random.rand()
