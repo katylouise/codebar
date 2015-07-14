@@ -26,7 +26,9 @@ class Coach < Member
   end
 
   def skills
-    @skills.each{ |s| puts s }
+    skills_str = ""
+    @skills.each{ |s| skills_str += "#{s}, " }
+    skills_str.rstrip.chop
   end
 end
 
@@ -49,13 +51,26 @@ class Workshop
 
   def print_details
     puts "#"
-    puts "# Workshop - #{self.date} - Venue: #{venue_name}"
+    print_workshop_details
     puts "#"
+    print_student_details
+    puts "#"
+    print_coach_details
+  end
+
+  private
+  def print_workshop_details
+    puts "# Workshop - #{self.date} - Venue: #{venue_name}"
+  end
+
+  def print_student_details
     puts "# Students"
     students.each_with_index{ |s, i| puts "# #{i + 1}. #{s.full_name} - #{s.about}"}
-    puts "#"
+  end
+
+  def print_coach_details
     puts "# Coaches"
-    coaches.each_with_index{ |c, i| puts "# #{i + 1}. #{c.full_name} - #{c.skills}\n #{c.bio}"}
+    coaches.each_with_index{ |c, i| puts "# #{i + 1}. #{c.full_name} - #{c.skills}\n# #{c.bio}"}
   end
 end
 
@@ -74,4 +89,5 @@ workshop.add_participant(lena)
 workshop.add_participant(vicky)
 workshop.add_participant(nicole)
 workshop.print_details
+
 
